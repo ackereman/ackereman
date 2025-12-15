@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" style="font-family: Arial, sans-serif;">
+  <!-- Title -->
+  <text x="500" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c3e50">图3: 多模态融合与结构学习框架</text>
+  
+  <!-- Data Sources Layer -->
+  <text x="500" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#555">数据层</text>
+  
+  <!-- Grid Data Source -->
+  <g id="grid-data-source">
+    <rect x="50" y="70" width="200" height="100" rx="8" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+    <text x="150" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#2196f3">栅格数据</text>
+    <text x="150" y="110" text-anchor="middle" font-size="10" fill="#333">遥感影像</text>
+    <text x="150" y="128" text-anchor="middle" font-size="10" fill="#333">地球物理</text>
+    <text x="150" y="146" text-anchor="middle" font-size="10" fill="#333">DEM/坡度</text>
+    <text x="150" y="164" text-anchor="middle" font-size="10" fill="#555">(H×W×C)</text>
+  </g>
+  
+  <!-- Geochemical Data Source -->
+  <g id="geochem-data-source">
+    <rect x="300" y="70" width="200" height="100" rx="8" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+    <text x="400" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#ff9800">地球化学数据</text>
+    <text x="400" y="110" text-anchor="middle" font-size="10" fill="#333">元素含量</text>
+    <text x="400" y="128" text-anchor="middle" font-size="10" fill="#333">化探异常</text>
+    <text x="400" y="146" text-anchor="middle" font-size="10" fill="#333">统计特征</text>
+    <text x="400" y="164" text-anchor="middle" font-size="10" fill="#555">(N×F)</text>
+  </g>
+  
+  <!-- Structural Data Source -->
+  <g id="struct-data-source">
+    <rect x="550" y="70" width="200" height="100" rx="8" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+    <text x="650" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#9c27b0">构造网络</text>
+    <text x="650" y="110" text-anchor="middle" font-size="10" fill="#333">断裂系统</text>
+    <text x="650" y="128" text-anchor="middle" font-size="10" fill="#333">地层单元</text>
+    <text x="650" y="146" text-anchor="middle" font-size="10" fill="#333">空间拓扑</text>
+    <text x="650" y="164" text-anchor="middle" font-size="10" fill="#555">(Graph: V,E)</text>
+  </g>
+  
+  <!-- Geological Map Source -->
+  <g id="geo-map-source">
+    <rect x="800" y="70" width="150" height="100" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+    <text x="875" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#4caf50">地质图</text>
+    <text x="875" y="110" text-anchor="middle" font-size="10" fill="#333">岩性</text>
+    <text x="875" y="128" text-anchor="middle" font-size="10" fill="#333">年代</text>
+    <text x="875" y="146" text-anchor="middle" font-size="10" fill="#333">类别编码</text>
+  </g>
+  
+  <!-- Arrows from data to models -->
+  <path d="M 150 170 L 150 210" stroke="#2196f3" stroke-width="2" fill="none" marker-end="url(#arrowhead-blue)"/>
+  <path d="M 400 170 L 400 210" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead-orange)"/>
+  <path d="M 650 170 L 650 210" stroke="#9c27b0" stroke-width="2" fill="none" marker-end="url(#arrowhead-purple)"/>
+  <path d="M 875 170 L 875 210" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrowhead-green)"/>
+  
+  <!-- Processing Layer -->
+  <text x="500" y="205" text-anchor="middle" font-size="13" font-weight="bold" fill="#555">特征提取层</text>
+  
+  <!-- CNN for Grid Data -->
+  <g id="cnn-module">
+    <rect x="50" y="210" width="200" height="120" rx="8" fill="#bbdefb" stroke="#1976d2" stroke-width="2"/>
+    <text x="150" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#1976d2">CNN</text>
+    <rect x="70" y="240" width="50" height="40" rx="3" fill="#fff" stroke="#1976d2" stroke-width="1"/>
+    <text x="95" y="263" text-anchor="middle" font-size="9" fill="#333">Conv</text>
+    <path d="M 120 260 L 135 260" stroke="#1976d2" stroke-width="1.5" fill="none" marker-end="url(#arrowhead-small)"/>
+    <rect x="135" y="240" width="40" height="40" rx="3" fill="#fff" stroke="#1976d2" stroke-width="1"/>
+    <text x="155" y="263" text-anchor="middle" font-size="9" fill="#333">Pool</text>
+    <path d="M 175 260 L 190 260" stroke="#1976d2" stroke-width="1.5" fill="none" marker-end="url(#arrowhead-small)"/>
+    <rect x="190" y="240" width="40" height="40" rx="3" fill="#fff" stroke="#1976d2" stroke-width="1"/>
+    <text x="210" y="263" text-anchor="middle" font-size="9" fill="#333">Conv</text>
+    <text x="150" y="298" text-anchor="middle" font-size="10" fill="#333">空间模式提取</text>
+    <text x="150" y="315" text-anchor="middle" font-size="9" fill="#555">→ 特征图 F_cnn</text>
+  </g>
+  
+  <!-- Statistical Encoder for Geochem -->
+  <g id="stat-encoder">
+    <rect x="300" y="210" width="200" height="120" rx="8" fill="#ffe0b2" stroke="#f57c00" stroke-width="2"/>
+    <text x="400" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#f57c00">统计编码</text>
+    <rect x="330" y="245" width="140" height="25" rx="3" fill="#fff" stroke="#f57c00" stroke-width="1"/>
+    <text x="400" y="262" text-anchor="middle" font-size="9" fill="#333">归一化/对数变换</text>
+    <rect x="330" y="280" width="140" height="25" rx="3" fill="#fff" stroke="#f57c00" stroke-width="1"/>
+    <text x="400" y="297" text-anchor="middle" font-size="9" fill="#333">全连接层</text>
+    <text x="400" y="315" text-anchor="middle" font-size="9" fill="#555">→ 向量 F_chem</text>
+  </g>
+  
+  <!-- GNN for Structural Data -->
+  <g id="gnn-module">
+    <rect x="550" y="210" width="200" height="120" rx="8" fill="#e1bee7" stroke="#7b1fa2" stroke-width="2"/>
+    <text x="650" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#7b1fa2">GNN</text>
+    <circle cx="610" cy="265" r="15" fill="#fff" stroke="#7b1fa2" stroke-width="1"/>
+    <text x="610" y="270" text-anchor="middle" font-size="9" fill="#333">v1</text>
+    <circle cx="650" cy="265" r="15" fill="#fff" stroke="#7b1fa2" stroke-width="1"/>
+    <text x="650" y="270" text-anchor="middle" font-size="9" fill="#333">v2</text>
+    <circle cx="690" cy="265" r="15" fill="#fff" stroke="#7b1fa2" stroke-width="1"/>
+    <text x="690" y="270" text-anchor="middle" font-size="9" fill="#333">v3</text>
+    <path d="M 625 265 L 635 265" stroke="#7b1fa2" stroke-width="1.5"/>
+    <path d="M 665 265 L 675 265" stroke="#7b1fa2" stroke-width="1.5"/>
+    <path d="M 610 280 L 650 280 L 690 280" stroke="#7b1fa2" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="650" y="298" text-anchor="middle" font-size="10" fill="#333">消息传递</text>
+    <text x="650" y="315" text-anchor="middle" font-size="9" fill="#555">→ 图嵌入 F_gnn</text>
+  </g>
+  
+  <!-- Categorical Encoder for Geo Map -->
+  <g id="cat-encoder">
+    <rect x="800" y="210" width="150" height="120" rx="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="2"/>
+    <text x="875" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#388e3c">类别编码</text>
+    <rect x="820" y="245" width="110" height="25" rx="3" fill="#fff" stroke="#388e3c" stroke-width="1"/>
+    <text x="875" y="262" text-anchor="middle" font-size="9" fill="#333">Embedding</text>
+    <rect x="820" y="280" width="110" height="25" rx="3" fill="#fff" stroke="#388e3c" stroke-width="1"/>
+    <text x="875" y="297" text-anchor="middle" font-size="9" fill="#333">One-hot/Dense</text>
+    <text x="875" y="315" text-anchor="middle" font-size="9" fill="#555">→ F_geo</text>
+  </g>
+  
+  <!-- Arrows to fusion -->
+  <path d="M 150 330 L 150 380 L 400 380" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 400 330 L 400 380" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 650 330 L 650 380 L 500 380" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 875 330 L 875 380 L 600 380" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 400 380 L 450 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 500 380 L 500 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 500 380 L 550 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Fusion Layer -->
+  <text x="500" y="395" text-anchor="middle" font-size="13" font-weight="bold" fill="#555">融合层</text>
+  
+  <g id="transformer-fusion">
+    <rect x="300" y="400" width="400" height="100" rx="8" fill="#fff9c4" stroke="#f9a825" stroke-width="3"/>
+    <text x="500" y="425" text-anchor="middle" font-size="14" font-weight="bold" fill="#f57f17">Transformer 多模态融合</text>
+    
+    <!-- Self-attention mechanism -->
+    <rect x="330" y="440" width="110" height="30" rx="4" fill="#fff" stroke="#f9a825" stroke-width="1.5"/>
+    <text x="385" y="460" text-anchor="middle" font-size="10" fill="#333">Self-Attention</text>
+    
+    <rect x="460" y="440" width="110" height="30" rx="4" fill="#fff" stroke="#f9a825" stroke-width="1.5"/>
+    <text x="515" y="460" text-anchor="middle" font-size="10" fill="#333">Cross-Attention</text>
+    
+    <rect x="590" y="440" width="80" height="30" rx="4" fill="#fff" stroke="#f9a825" stroke-width="1.5"/>
+    <text x="630" y="460" text-anchor="middle" font-size="10" fill="#333">FFN</text>
+    
+    <text x="500" y="488" text-anchor="middle" font-size="9" fill="#555">联合表示 F_fused</text>
+  </g>
+  
+  <!-- Arrow to output -->
+  <path d="M 500 500 L 500 530" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Output Layer -->
+  <g id="output">
+    <rect x="350" y="530" width="300" height="60" rx="8" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+    <text x="500" y="555" text-anchor="middle" font-size="13" font-weight="bold" fill="#c62828">预测输出</text>
+    <text x="500" y="575" text-anchor="middle" font-size="11" fill="#333">矿产远景概率 + 不确定性估计</text>
+  </g>
+  
+  <!-- Arrow marker definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-small" markerWidth="8" markerHeight="8" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0, 8 2.5, 0 5" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2196f3"/>
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff9800"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9c27b0"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4caf50"/>
+    </marker>
+  </defs>
+</svg>

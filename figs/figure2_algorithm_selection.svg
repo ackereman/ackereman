@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" style="font-family: Arial, sans-serif;">
+  <!-- Title -->
+  <text x="450" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c3e50">图2: 算法选型指引</text>
+  
+  <!-- Root: Task Characteristics -->
+  <g id="root">
+    <rect x="350" y="50" width="200" height="50" rx="8" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+    <text x="450" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">任务特征</text>
+    <text x="450" y="88" text-anchor="middle" font-size="11" fill="#fff">(样本量/数据类型)</text>
+  </g>
+  
+  <!-- Branches -->
+  <path d="M 450 100 L 450 130" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 450 130 L 150 130 L 150 160" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 450 130 L 450 160" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 450 130 L 750 130 L 750 160" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Small Sample Branch -->
+  <g id="small-sample">
+    <rect x="50" y="160" width="200" height="50" rx="8" fill="#2196f3" stroke="#1565c0" stroke-width="2"/>
+    <text x="150" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">小样本</text>
+    <text x="150" y="198" text-anchor="middle" font-size="10" fill="#fff">(边界清晰, 精选特征)</text>
+    
+    <path d="M 150 210 L 150 240" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <rect x="50" y="240" width="200" height="80" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+    <text x="150" y="260" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">推荐: SVM / RF</text>
+    <text x="150" y="280" text-anchor="middle" font-size="10" fill="#333">• 最大间隔原理</text>
+    <text x="150" y="295" text-anchor="middle" font-size="10" fill="#333">• 核技巧</text>
+    <text x="150" y="310" text-anchor="middle" font-size="10" fill="#333">• 鲁棒性强</text>
+  </g>
+  
+  <!-- Medium Sample Branch -->
+  <g id="medium-sample">
+    <rect x="350" y="160" width="200" height="50" rx="8" fill="#ff9800" stroke="#e65100" stroke-width="2"/>
+    <text x="450" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">中样本</text>
+    <text x="450" y="198" text-anchor="middle" font-size="10" fill="#fff">(多源混合, 表格数据)</text>
+    
+    <path d="M 450 210 L 450 240" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <rect x="350" y="240" width="200" height="80" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="450" y="260" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">推荐: XGBoost/LightGBM</text>
+    <text x="450" y="280" text-anchor="middle" font-size="10" fill="#333">• 集成学习</text>
+    <text x="450" y="295" text-anchor="middle" font-size="10" fill="#333">• 可解释性</text>
+    <text x="450" y="310" text-anchor="middle" font-size="10" fill="#333">• 特征重要度</text>
+  </g>
+  
+  <!-- Large Sample Branch - splits further -->
+  <g id="large-sample">
+    <rect x="650" y="160" width="200" height="50" rx="8" fill="#9c27b0" stroke="#6a1b9a" stroke-width="2"/>
+    <text x="750" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">大样本/强空间结构</text>
+    <text x="750" y="198" text-anchor="middle" font-size="10" fill="#fff">(栅格数据/拓扑关系)</text>
+  </g>
+  
+  <!-- Sub-branches for large sample -->
+  <path d="M 750 210 L 750 240" stroke="#666" stroke-width="2" fill="none"/>
+  <path d="M 750 240 L 600 240 L 600 270" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 750 240 L 900 240 L 900 270" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Grid Data -->
+  <g id="grid-data">
+    <rect x="500" y="270" width="200" height="50" rx="8" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
+    <text x="600" y="290" text-anchor="middle" font-size="11" font-weight="bold" fill="#6a1b9a">栅格数据重</text>
+    <text x="600" y="308" text-anchor="middle" font-size="9" fill="#333">(遥感/物探)</text>
+    
+    <path d="M 600 320 L 600 350" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <rect x="500" y="350" width="200" height="70" rx="8" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+    <text x="600" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#6a1b9a">CNN / Transformer</text>
+    <text x="600" y="388" text-anchor="middle" font-size="9" fill="#333">• 空间模式提取</text>
+    <text x="600" y="403" text-anchor="middle" font-size="9" fill="#333">• 多尺度融合</text>
+  </g>
+  
+  <!-- Topology Data -->
+  <g id="topology-data">
+    <rect x="800" y="270" width="200" height="50" rx="8" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
+    <text x="900" y="290" text-anchor="middle" font-size="11" font-weight="bold" fill="#6a1b9a">拓扑/结构重</text>
+    <text x="900" y="308" text-anchor="middle" font-size="9" fill="#333">(断裂网络/构造)</text>
+    
+    <path d="M 900 320 L 900 350" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <rect x="800" y="350" width="200" height="70" rx="8" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+    <text x="900" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#6a1b9a">GNN</text>
+    <text x="900" y="388" text-anchor="middle" font-size="9" fill="#333">• 拓扑关系建模</text>
+    <text x="900" y="403" text-anchor="middle" font-size="9" fill="#333">• 消息传递机制</text>
+  </g>
+  
+  <!-- Additional recommendations -->
+  <g id="recommendations">
+    <rect x="50" y="430" width="800" height="50" rx="8" fill="#fffde7" stroke="#f9a825" stroke-width="2"/>
+    <text x="450" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#f57f17">辅助策略:</text>
+    <text x="450" y="468" text-anchor="middle" font-size="10" fill="#333">小样本场景 → 半监督/迁移学习  |  高精度需求 → 模型集成  |  可信度要求 → 不确定性评估+留区验证</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+</svg>
